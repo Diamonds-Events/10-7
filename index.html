@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مودبورد زفاف - الأميرة نورة بنت مساعد</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #F9F7F2;
+            font-family: 'Cormorant Garamond', serif;
+            color: #4A3F35;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, #F5F0E8 0%, #EDE5D8 50%, #E8DED0 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.06) 0%, transparent 50%),
+                radial-gradient(circle at 50% 80%, rgba(212, 175, 55, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1.5s ease-out;
+        }
+
+        .hero-label {
+            font-size: 1rem;
+            letter-spacing: 6px;
+            color: #B8A88A;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 400;
+            color: #3D3229;
+            line-height: 1.3;
+            margin-bottom: 15px;
+        }
+
+        .hero-title span {
+            display: block;
+            font-style: italic;
+            color: #A68B5B;
+            font-weight: 300;
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            color: #8C7B65;
+            letter-spacing: 3px;
+            margin-bottom: 30px;
+        }
+
+        .hero-date {
+            font-size: 1.2rem;
+            color: #A68B5B;
+            letter-spacing: 4px;
+            border: 1px solid rgba(166, 139, 91, 0.3);
+            padding: 12px 40px;
+            display: inline-block;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator svg {
+            width: 30px;
+            height: 30px;
+            stroke: #A68B5B;
+        }
+
+        /* Color Palette Section */
+        .palette-section {
+            padding: 100px 20px;
+            background: #F5F0E8;
+            text-align: center;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: #3D3229;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 1px;
+            background: #A68B5B;
+            margin: 15px auto 0;
+        }
+
+        .palette-subtitle {
+            font-size: 1.1rem;
+            color: #8C7B65;
+            margin-bottom: 60px;
+            letter-spacing: 2px;
+        }
+
+        .palette-container {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            flex-wrap: wrap;
+            max-width: 1000px;
+            margin: 0 auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .palette-item {
+            flex: 1;
+            min-width: 120px;
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 20px;
+            position: relative;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            cursor: pointer;
+        }
+
+        .palette-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            z-index: 10;
+        }
+
+        .palette-item .color-name {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.9);
+            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .palette-item .color-hex {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.7);
+            margin-top: 5px;
+            font-family: 'Courier New', monospace;
+        }
+
+        /* Moodboard Grid */
+        .moodboard-section {
+            padding: 100px 20px;
+            background: #F9F7F2;
+        }
+
+        .moodboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .moodboard-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #EDE5D8;
+            aspect-ratio: 4/5;
+        }
+
+        .moodboard-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .moodboard-item:hover img {
+            transform: scale(1.08);
+        }
+
+        .moodboard-item .overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(61, 50, 41, 0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.4s ease;
+        }
+
+        .moodboard-item:hover .overlay {
+            background: rgba(61, 50, 41, 0.2);
+        }
+
+        .moodboard-item .zoom-icon {
+            width: 50px;
+            height: 50px;
+            border: 1px solid rgba(255,255,255,0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.4s ease;
+        }
+
+        .moodboard-item:hover .zoom-icon {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .moodboard-item .zoom-icon svg {
+            width: 20px;
+            height: 20px;
+            stroke: white;
+        }
+
+        .moodboard-item.wide {
+            grid-column: span 2;
+            aspect-ratio: 16/9;
+        }
+
+        .moodboard-item.tall {
+            grid-row: span 2;
+            aspect-ratio: 3/4;
+        }
+
+        /* Aisle Section */
+        .aisle-section {
+            padding: 100px 20px;
+            background: linear-gradient(180deg, #F9F7F2 0%, #F5F0E8 100%);
+            text-align: center;
+        }
+
+        .aisle-container {
+            max-width: 1000px;
+            margin: 60px auto 0;
+            position: relative;
+        }
+
+        .aisle-image {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.4s ease;
+        }
+
+        .aisle-image:hover {
+            transform: scale(1.02);
+        }
+
+        .aisle-label {
+            position: absolute;
+            top: -20px;
+            right: 40px;
+            background: #3D3229;
+            color: #E8DED0;
+            padding: 10px 30px;
+            font-size: 0.9rem;
+            letter-spacing: 3px;
+            border-radius: 4px;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(20, 15, 10, 0.95);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .lightbox.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .lightbox img {
+            max-width: 90vw;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 30px 100px rgba(0,0,0,0.5);
+            transform: scale(0.9);
+            transition: transform 0.4s ease;
+        }
+
+        .lightbox.active img {
+            transform: scale(1);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+        }
+
+        .lightbox-close:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .lightbox-close svg {
+            width: 24px;
+            height: 24px;
+            stroke: white;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 80px 20px;
+            background: #3D3229;
+            text-align: center;
+            color: #E8DED0;
+        }
+
+        .footer-divider {
+            width: 60px;
+            height: 1px;
+            background: #A68B5B;
+            margin: 0 auto 30px;
+        }
+
+        .footer-text {
+            font-size: 1.1rem;
+            letter-spacing: 4px;
+            color: #B8A88A;
+            margin-bottom: 10px;
+        }
+
+        .footer-designer {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: #E8DED0;
+            font-weight: 400;
+        }
+
+        .footer-designer span {
+            color: #A68B5B;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-15px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-8px);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .moodboard-grid {
+                grid-template-columns: 1fr;
+            }
+            .moodboard-item.wide {
+                grid-column: span 1;
+            }
+            .moodboard-item.tall {
+                grid-row: span 1;
+            }
+            .palette-item {
+                min-width: 100px;
+                height: 150px;
+            }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-label">مودبورد زفاف</div>
+            <h1 class="hero-title">
+                الأميرة نورة بنت مساعد
+                <span>قاعة نيارة  اليمامة</span>
+            </h1>
+            <div class="hero-subtitle">تصميم الديكور</div>
+            <div class="hero-date">10 - 7 - 2026</div>
+        </div>
+        <div class="scroll-indicator">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+                <path d="M12 5v14M5 12l7 7 7-7"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Color Palette Section -->
+    <section class="palette-section">
+        <h2 class="section-title">درجات الباج</h2>
+        <p class="palette-subtitle">Color Palette</p>
+        <div class="palette-container">
+                        <div class="palette-item" style="background: #F5F0E8;">
+                <div class="color-name">بيج فاتح</div>
+                <div class="color-hex">#F5F0E8</div>
+            </div>
+            <div class="palette-item" style="background: #EDE5D8;">
+                <div class="color-name">بيج </div>
+                <div class="color-hex">#EDE5D8</div>
+            </div>
+            <div class="palette-item" style="background: #E8DED0;">
+                <div class="color-name">كريمي</div>
+                <div class="color-hex">#E8DED0</div>
+            </div>
+            <div class="palette-item" style="background: #D4C4A8;">
+                <div class="color-name">بيج ذهبي</div>
+                <div class="color-hex">#D4C4A8</div>
+            </div>
+                              
+    </section>
+
+    <!-- Moodboard Grid -->
+    <section class="moodboard-section">
+        <h2 class="section-title" style="text-align: center; display: block; margin-bottom: 60px;">إلهامات التصميم</h2>
+        <div class="moodboard-grid">
+            <div class="moodboard-item wide" onclick="openLightbox('https://i.imgur.com/8N3vlvs.jpg')">
+                <img src="https://i.imgur.com/8N3vlvs.jpg" alt="Wedding Inspiration 1" loading="lazy">
+                <div class="overlay">
+                    <div class="zoom-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"/>
+                            <path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="moodboard-item" onclick="openLightbox('https://i.imgur.com/73R3HAv.jpg')">
+                <img src="https://i.imgur.com/73R3HAv.jpg" alt="Wedding Inspiration 2" loading="lazy">
+                <div class="overlay">
+                    <div class="zoom-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"/>
+                            <path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="moodboard-item" onclick="openLightbox('https://i.imgur.com/bZt9Cma.jpg')">
+                <img src="https://i.imgur.com/bZt9Cma.jpg" alt="Wedding Inspiration 3" loading="lazy">
+                <div class="overlay">
+                    <div class="zoom-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"/>
+                            <path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="moodboard-item tall" onclick="openLightbox('https://i.imgur.com/6nzAxiF.jpg')">
+                <img src="https://i.imgur.com/6nzAxiF.jpg" alt="Wedding Inspiration 4" loading="lazy">
+                <div class="overlay">
+                    <div class="zoom-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"/>
+                            <path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="moodboard-item" onclick="openLightbox('https://i.imgur.com/yIBDfCI.jpg')">
+                <img src="https://i.imgur.com/yIBDfCI.jpg" alt="Wedding Inspiration 5" loading="lazy">
+                <div class="overlay">
+                    <div class="zoom-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"/>
+                            <path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="moodboard-item wide" onclick="openLightbox('https://i.imgur.com/E4UKPtY.jpg')">
+                <img src="https://i.imgur.com/E4UKPtY.jpg" alt="Wedding Inspiration 6" loading="lazy">
+                <div class="overlay">
+                    <div class="zoom-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"/>
+                            <path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="moodboard-item" onclick="openLightbox('https://i.imgur.com/1z478qz.jpg')">
+                <img src="https://i.imgur.com/1z478qz.jpg" alt="Wedding Inspiration 7" loading="lazy">
+                <div class="overlay">
+                    <div class="zoom-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"/>
+                            <path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="moodboard-item" onclick="openLightbox('https://i.imgur.com/BNdMpKS.jpg')">
+                <img src="https://i.imgur.com/BNdMpKS.jpg" alt="Wedding Inspiration 8" loading="lazy">
+                <div class="overlay">
+                    <div class="zoom-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"/>
+                            <path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Aisle Section -->
+    <section class="aisle-section">
+        <h2 class="section-title">تصميم الممر</h2>
+        <p class="palette-subtitle">Aisle Design</p>
+        <div class="aisle-container">
+            <div class="aisle-label">رسمت الممر مع اللون</div>
+            <img class="aisle-image" src="https://i.imgur.com/htyjOks.jpg" alt="Aisle Design" onclick="openLightbox('https://i.imgur.com/htyjOks.jpg')">
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+        <button class="lightbox-close" onclick="closeLightbox(event)">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                <path d="M18 6L6 18M6 6l12 12"/>
+            </svg>
+        </button>
+        <img id="lightbox-img" src="" alt="Full size">
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-divider"></div>
+        <div class="footer-text">المصمم</div>
+        <div class="footer-designer">محمد <span>التونسي</span></div>
+    </footer>
+
+    <script>
+        function openLightbox(src) {
+            const lightbox = document.getElementById('lightbox');
+            const img = document.getElementById('lightbox-img');
+            img.src = src;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox(event) {
+            if (event.target === event.currentTarget || event.target.closest('.lightbox-close')) {
+                const lightbox = document.getElementById('lightbox');
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        // Close on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const lightbox = document.getElementById('lightbox');
+                if (lightbox.classList.contains('active')) {
+                    lightbox.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            }
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
